@@ -16,7 +16,6 @@ typedef enum {
   TOO_HIGH
 } BreachType;
 
-
 typedef enum {
   TO_CONTROLLER,
   TO_EMAIL,
@@ -46,4 +45,5 @@ AlertRetStatus checkAndAlert(
 
 AlertRetStatus sendToController(BreachType breachType);
 AlertRetStatus sendToEmail(BreachType breachType);
+AlertRetStatus sendToConsole(BreachType breachType);
 AlertRetStatus(*AlertType[])(BreachType) = {sendToController, sendToEmail, sendToController};
