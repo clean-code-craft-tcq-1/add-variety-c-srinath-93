@@ -1,5 +1,7 @@
 #include "typewise-alert.h"
 #include <stdio.h>
+LimitDetail_st classifyTemperatureBreach[] = {{LOWER_LIMIT, PASSIVE_COOLING_UPPER_LIMIT},{LOWER_LIMIT,HI_ACTIVE_COOLING_UPPER_LIMIT},{LOWER_LIMIT,MED_ACTIVE_COOLING_UPPER_LIMIT}};
+AlertRetStatus(*AlertType[])(BreachType) = {sendToController, sendToEmail, sendToController};
 
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   if(value < lowerLimit) {
@@ -41,8 +43,7 @@ AlertRetStatus sendToConsole(BreachType breachType) {
 }
 AlertRetStatus checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
   AlertRetStatus checkAlertRetStatus;
-  BreachType typeOfBreach = inferBreach(temperatureInC, classifyTemperatureBreach[batteryChar.coolingType].lowerLimit, 
-                                      classifyTemperatureBreach[batteryChar.coolingType].upperLimit);
+  BreachType typeOfBreach = inferBreach(temperatureInC, classifyTemperatureBreach[batteryChar.coolingType].lowerLimit, classifyTemperatureBreach[batteryChar.coolingType].upperLimit);
   checkAlertRetStatus = AlertType[alertTarget](typeOfBreach);
   return checkAlertRetStatus;
 }
