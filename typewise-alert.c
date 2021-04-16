@@ -20,7 +20,7 @@ AlertRetStatus sendToController(BreachType breachType)
 
 AlertRetStatus sendToEmail(BreachType breachType) {
   const char* recepient = "a.b@c.com";
-  AlertRetStatus statusRet;
+  AlertRetStatus statusRet = ALERT_FAILURE;
   switch(breachType){
     case TOO_LOW:
       printf("To: %s\n Hi, the temperature is too low\n", recepient);
@@ -34,13 +34,14 @@ AlertRetStatus sendToEmail(BreachType breachType) {
       statusRet = ALERT_SUCCESS;
       break;
       default:
-      statusRet = ALERT_FAILURE;
+      /* Do nothing */
       break;  
   }
   return statusRet;
 }
 AlertRetStatus sendToConsole(BreachType breachType) {
   printf("Breach Types Lookup -\nNORMAL - 0 \nTOO_LOW - 1 \nTOO_HIGH - 2 \nThe current breach type is %d \n",breachType);
+  retrun ALERT_SUCCESS;
 }
 AlertRetStatus checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) 
 {
