@@ -32,8 +32,13 @@ TEST_CASE("infers the low breach according to passive cooling limits and sending
 }
 
 TEST_CASE("infers the no breach according to high active cooling limits and sending to Console") {
-  BatteryCharacter batteryChar = {HI_ACTIVE_COOLING, "HI_ACTIVE_COOLING"};
+  BatteryCharacter batteryChar = {HI_ACTIVE_COOLING, "NORMAL_HI_ACTIVE_COOLING"};
   REQUIRE(checkAndAlert(TO_CONSOLE, batteryChar, 45) == ALERT_SUCCESS);
+}
+
+TEST_CASE("infers the no breach according to high active cooling limits and sending to Console") {
+  BatteryCharacter batteryChar = {HI_ACTIVE_COOLING, "NORMAL_HI_ACTIVE_COOLING"};
+  REQUIRE(checkAndAlert(TO_EMAIL, batteryChar, 45) == ALERT_SUCCESS);
 }
 
 TEST_CASE("infers the high breach according to high active cooling limits and sending to e-mail") {
@@ -46,8 +51,13 @@ TEST_CASE("infers the low breach according to high active cooling limits and sen
   REQUIRE(checkAndAlert(TO_CONTROLLER, batteryChar, -2) == ALERT_SUCCESS);
 }
 
+TEST_CASE("infers the low breach according to high active cooling limits and sending to controller") {
+  BatteryCharacter batteryChar = {HI_ACTIVE_COOLING, "HI_ACTIVE_COOLING_LOW_BREACH"};
+  REQUIRE(checkAndAlert(TO_EMAIL, batteryChar, -2) == ALERT_SUCCESS);
+}
+
 TEST_CASE("infers the no breach according to med active cooling limits and sending to Console") {
-  BatteryCharacter batteryChar = {MED_ACTIVE_COOLING, "MED_ACTIVE_COOLING"};
+  BatteryCharacter batteryChar = {MED_ACTIVE_COOLING, "NORMAL_MED_ACTIVE_COOLING"};
   REQUIRE(checkAndAlert(TO_CONSOLE, batteryChar, 40) == ALERT_SUCCESS);
 }
 
