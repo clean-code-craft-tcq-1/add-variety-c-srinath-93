@@ -21,7 +21,7 @@ AlertRetStatus sendToController(BreachType breachType) {
 
 AlertRetStatus sendToEmail(BreachType breachType) {
   const char* recepient = "a.b@c.com";
-  AlertRetStatus statusRet = ALERT_FAILURE;
+  AlertRetStatus statusRet = ALERT_SUCCESS;
   switch(breachType){
     case TOO_LOW:
       printf("To: %s\n Hi, the temperature is too low\n", recepient);
@@ -29,9 +29,6 @@ AlertRetStatus sendToEmail(BreachType breachType) {
       break;
     case TOO_HIGH:
       printf("To: %s\n Hi, the temperature is too high\n",recepient);
-      statusRet = ALERT_SUCCESS;
-      break;
-    case NORMAL:
       statusRet = ALERT_SUCCESS;
       break;
   }
