@@ -1,7 +1,7 @@
 #include "typewise-alert.h"
 #include <stdio.h>
 LimitDetail_st classifyTemperatureBreach[] = {{LOWER_LIMIT, PASSIVE_COOLING_UPPER_LIMIT},{LOWER_LIMIT,HI_ACTIVE_COOLING_UPPER_LIMIT},{LOWER_LIMIT,MED_ACTIVE_COOLING_UPPER_LIMIT}};
-AlertRetStatus(*AlertType[])(BreachType) = {sendToController, sendToEmail, sendToController};
+AlertRetStatus(*AlertType[])(BreachType) = {sendToController, sendToEmail, sendToConsole};
 
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   if(value < lowerLimit) {
