@@ -41,7 +41,7 @@ AlertRetStatus sendToEmail(BreachType breachType) {
 }
 AlertRetStatus sendToConsole(BreachType breachType) {
   printf("Breach Types Lookup -\nNORMAL - 0 \nTOO_LOW - 1 \nTOO_HIGH - 2 \nThe current breach type is %d \n",breachType);
-  retrun ALERT_SUCCESS;
+  return ALERT_SUCCESS;
 }
 AlertRetStatus checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) 
 {
