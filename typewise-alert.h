@@ -38,7 +38,6 @@ typedef struct {
   double upperLimit;
 }LimitDetail_st;
 
-LimitDetail_st classifyTemperatureBreach[] = {{LOWER_LIMIT, PASSIVE_COOLING_UPPER_LIMIT},{LOWER_LIMIT,HI_ACTIVE_COOLING_UPPER_LIMIT},{LOWER_LIMIT,MED_ACTIVE_COOLING_UPPER_LIMIT}};
 BreachType inferBreach(double value, double lowerLimit, double upperLimit);
 AlertRetStatus checkAndAlert(
   AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC);
@@ -46,4 +45,3 @@ AlertRetStatus checkAndAlert(
 AlertRetStatus sendToController(BreachType breachType);
 AlertRetStatus sendToEmail(BreachType breachType);
 AlertRetStatus sendToConsole(BreachType breachType);
-AlertRetStatus(*AlertType[])(BreachType) = {sendToController, sendToEmail, sendToController};
