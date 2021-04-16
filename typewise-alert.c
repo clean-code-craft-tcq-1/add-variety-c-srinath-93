@@ -11,11 +11,10 @@ BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
   return NORMAL;
 }
 
-AlertRetStatus sendToController(BreachType breachType)
-{
+AlertRetStatus sendToController(BreachType breachType) {
   const unsigned short header = 0xfeed;
   printf("%x : %x\n", header, breachType);
-  retrun ALERT_SUCCESS;
+  return ALERT_SUCCESS;
 }
 
 AlertRetStatus sendToEmail(BreachType breachType) {
@@ -33,9 +32,6 @@ AlertRetStatus sendToEmail(BreachType breachType) {
     case NORMAL:
       statusRet = ALERT_SUCCESS;
       break;
-      default:
-      /* Do nothing */
-      break;  
   }
   return statusRet;
 }
@@ -43,11 +39,10 @@ AlertRetStatus sendToConsole(BreachType breachType) {
   printf("Breach Types Lookup -\nNORMAL - 0 \nTOO_LOW - 1 \nTOO_HIGH - 2 \nThe current breach type is %d \n",breachType);
   return ALERT_SUCCESS;
 }
-AlertRetStatus checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) 
-{
+AlertRetStatus checkAndAlert(AlertTarget alertTarget, BatteryCharacter batteryChar, double temperatureInC) {
   AlertRetStatus checkAlertRetStatus;
-  BreachType breachType = inferBreach(temperatureInC, classifyTemperatureBreach[batteryChar.coolingType].lowerLimit, 
+  BreachType typeOfBreach = inferBreach(temperatureInC, classifyTemperatureBreach[batteryChar.coolingType].lowerLimit, 
                                       classifyTemperatureBreach[batteryChar.coolingType].upperLimit);
-  checkAlertRetStatus = AlertType[alertTarget](BreachType);
+  checkAlertRetStatus = AlertType[alertTarget](typeOfBreach);
   return checkAlertRetStatus;
 }
